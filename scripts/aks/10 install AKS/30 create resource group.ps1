@@ -1,0 +1,1 @@
+az group create --name magicbox --location westeurope -o table

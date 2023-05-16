@@ -1,0 +1,1 @@
+helm install karlo-mongo oci://registry-1.docker.io/bitnamicharts/mongodb -n dev-karlo --create-namespace

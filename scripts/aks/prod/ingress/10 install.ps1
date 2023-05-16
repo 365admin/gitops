@@ -1,0 +1,1 @@
+kubectl apply -f $PSScriptRoot/grafana.yaml -n monitoring 

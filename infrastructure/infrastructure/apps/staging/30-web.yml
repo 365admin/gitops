@@ -15,10 +15,12 @@ spec:
     spec:
       containers:
       - name: web
-        image: nielsgregers/magicbox-web:latest
+        image: nielsgregers/magicbox-web:v4
         env:
         - name: AMQP_URL
           value: amqp://worker:worker@magicbox-rabbitmq
+        - name: MONGO_SERVER
+          value: mongodb://root:eUPWmCoW6D@localhost:27017/?directConnection=true&authMechanism=DEFAULT
         ports:
           - containerPort: 3000
 

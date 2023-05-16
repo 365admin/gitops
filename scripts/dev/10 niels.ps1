@@ -1,0 +1,1 @@
+helm install niels-mongo oci://registry-1.docker.io/bitnamicharts/mongodb -n dev-niels --create-namespace

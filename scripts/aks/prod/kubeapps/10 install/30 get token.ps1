@@ -1,0 +1,1 @@
+kubectl get -n kubeapps secret

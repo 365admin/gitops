@@ -1,0 +1,1 @@
+kubectl apply -f $PSScriptRoot/20-worker.yml

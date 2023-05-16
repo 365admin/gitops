@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: workers
-  namespace: magicbox
+  namespace: magicbox-prod
 spec:
   selector:
     matchLabels:
@@ -15,10 +15,10 @@ spec:
     spec:
       containers:
       - name: worker
-        image: nielsgregers/magicbox-workers:v2
+        image: nielsgregers/magicbox-workers:v4
         env:
         - name: RABBITMQ_HOST
-          value: amqp://worker:worker@magicbox-rabbitmq
+          value: amqp://user:tavLdsTlZf8aY3Uy@rabbitmq-prod
         - name: EXCHAPPID
           value: a8594053-1bf1-490e-bba9-ae08e0f36bcd
         - name: EXCHORGANIZATION
