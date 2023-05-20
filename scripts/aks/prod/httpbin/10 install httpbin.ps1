@@ -1,2 +1,2 @@
 
-kubectl apply -n httpbin  -f $PSScriptRoot/httpbin.yaml
+kubectl apply -n mocks  -f $PSScriptRoot/httpbin.yaml

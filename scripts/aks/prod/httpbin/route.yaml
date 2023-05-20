@@ -3,7 +3,6 @@ kind: Ingress
 metadata:
   name: httpbin-route
 spec:
-  ingressClassName: apisix
   rules:
     - host: local.httpbin.org
       http:

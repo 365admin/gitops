@@ -1,24 +1,45 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: magicbox-staging
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: magicbox-staging
+  labels:
+    app: magicbox-staging
+    service: magicbox-staging
+spec:
+  ports:
+  - name: http
+    port: 8000
+    targetPort: 5301
+  selector:
+    app: magicbox-staging
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: web
-  namespace: magicbox-prod
+  name: magicbox-staging
 spec:
+  replicas: 1
   selector:
     matchLabels:
-      app: web
-  replicas: 3
+      app: magicbox-staging
+      version: v1
   template:
     metadata:
       labels:
-        app: web
+        app: magicbox-staging
+        version: v1
     spec:
+      serviceAccountName: magicbox-staging
       containers:
-      - name: web
-        image: nielsgregers/magicbox-web:latest
-        env:
-        - name: AMQP_URL
-          value: amqp://worker:worker@magicbox-rabbitmq
+      - image: nielsgregers/magicbox-web:latest
+        imagePullPolicy: IfNotPresent
+        name: magicbox-staging
         ports:
-          - containerPort: 3000
+        - containerPort: 5301
+
 

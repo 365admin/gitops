@@ -1,0 +1,30 @@
+# Define ApisixTls Objects
+apiVersion: apisix.apache.org/v2
+kind: ApisixTls
+metadata:
+  name: httpbin
+  namespace: ingress-apisix
+spec:
+  hosts:
+  - httpbin.org
+  secret:
+    name: httpbin
+    namespace: ingress-apisix
+---
+# Define the route to access the backend
+apiVersion: apisix.apache.org/v2
+kind: ApisixRoute
+metadata:
+  name: httpbin
+  namespace: ingress-apisix
+spec:
+  http:
+  - name: httpbin
+    match:
+      paths:
+      - /*
+      hosts:
+      - httpbin.org
+    backends:
+    - serviceName: httpbin
+      servicePort: 80

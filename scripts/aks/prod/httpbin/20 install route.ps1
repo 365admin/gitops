@@ -1,5 +1,5 @@
 
-kubectl apply -n httpbin  -f $PSScriptRoot/route.yaml
+kubectl apply -n mocks  -f $PSScriptRoot/route.yaml
 
 # http://localhost:50587/
 

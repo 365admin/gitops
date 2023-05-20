@@ -1,0 +1,28 @@
+# httpbin-cert.yaml
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: httpbin
+  namespace: ingress-apisix
+spec:
+  secretName: httpbin
+  duration: 2160h # 90d
+  renewBefore: 360h # 15d
+  subject:
+    organizations:
+      - foo
+  commonName: httpbin.org
+  isCA: false
+  privateKey:
+    algorithm: RSA
+    encoding: PKCS1
+    size: 2048
+  usages:
+    - server auth
+  dnsNames:
+    - "httpbin.org"
+    - "*.httpbin.org"
+  issuerRef:
+    name: issuer
+    kind: Issuer
+    group: cert-manager.io

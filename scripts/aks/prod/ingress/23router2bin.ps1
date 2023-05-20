@@ -1,0 +1,1 @@
+kubectl apply -f $PSScriptRoot/route2bin.yaml

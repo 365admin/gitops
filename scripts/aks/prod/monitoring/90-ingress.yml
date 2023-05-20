@@ -2,19 +2,18 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress
-  namespace: ingress-apisix
   annotations:
     kubernetes.io/ingress.class: nginx
 #    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   rules:
-    - host: magicbox-v1.nets-intranets.com
+    - host: magicbox-v1-grafana.nets-intranets.com
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: apisix-gateway
+                name: grafana-service
                 port:
-                  number: 80
+                  number: 3000
