@@ -6,19 +6,30 @@ metadata:
     linkerd.io/inject: enabled
   name: ingress-nginx
 ---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: nginx
+  namespace: ingress-nginx
+spec:
+  interval: 5m0s
+  url: oci://registry-1.docker.io/bitnamicharts
+  type: "oci"
+---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: nginx-ingress
+  name: nginx
   namespace: ingress-nginx
-  annotations:
-    fluxcd.io/ignore: "false"
 spec:
-  releaseName: nginx-ingress
+  interval: 5m
   chart:
-    repository: https://kubernetes-charts.storage.googleapis.com/
-    name: nginx-ingress
+    spec:
+      chart: nginx-ingress-controller
+      sourceRef:
+        kind: HelmRepository
+        name: nginx
+        namespace: ingress-nginx
+      interval: 1m
   values:
-    controller:
-      service:
-        type: LoadBalancer  
+    replicaCount: 2
