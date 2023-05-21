@@ -39,7 +39,7 @@ kind: ConfigMap
 metadata:
   creationTimestamp: null
   name: nginx-ingress-controller-helm-chart-value-overrides
-  namespace: nginx-ingress-controller
+  namespace: ingress
 data:
   values.yaml: |-
     ## @section Global parameters
