@@ -6,4 +6,4 @@
 
 # Include manifest directories
 !/apps/
-!/clusters/
+!/targets/
