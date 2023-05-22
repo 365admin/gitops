@@ -1,0 +1,17 @@
+apiVersion: apisix.apache.org/v2
+kind: ApisixRoute
+metadata:
+  name: method-route
+  namespace: monitor
+spec:
+  http:
+    - name: method
+      match:
+        hosts:
+          - magicbox-v1-grafana.nets-intranets.com
+        paths:
+          - /
+      backends:
+      - serviceName: grafana-service
+        servicePort: 3000
+

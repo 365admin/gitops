@@ -1,3 +1,8 @@
+#
+# This routes any traffic send to any domains to APISIX gateway for routing
+# Benefit here, is that is no TLS stuff running, it simply accepts all traffic
+# We use the plugins in APISIX to restrict what get accepted
+#
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
