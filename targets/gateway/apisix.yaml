@@ -51,3 +51,8 @@ spec:
       interval: 1m
   values:
     replicaCount: 2
+    config:
+      conf:
+        etcd:
+          endpoints:
+          - gateway-etcd:2379
