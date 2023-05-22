@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: grafana
-  namespace: monitoring
+  namespace: monitor
 spec:
   rules:
     - host: magicbox-v1-grafana.nets-intranets.com
