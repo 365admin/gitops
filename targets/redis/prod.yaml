@@ -1,0 +1,23 @@
+apiVersion: "app.redislabs.com/v1"
+kind: "RedisEnterpriseCluster"
+metadata:
+  name: prod
+  namespace: redis  
+spec:
+  nodes: 3
+---
+apiVersion: "app.redislabs.com/v1"
+kind: "RedisEnterpriseCluster"
+metadata:
+  name: test
+  namespace: redis  
+spec:
+  nodes: 3
+---
+apiVersion: "app.redislabs.com/v1"
+kind: "RedisEnterpriseCluster"
+metadata:
+  name: dev
+  namespace: redis  
+spec:
+  nodes: 3
