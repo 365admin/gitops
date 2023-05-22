@@ -3,6 +3,8 @@ kind: Ingress
 metadata:
   name: nets-intranets.com
   namespace: gateway
+  annotations:
+    kubernetes.io/ingress.class: nginx  
 spec:
   rules:
     - http:
