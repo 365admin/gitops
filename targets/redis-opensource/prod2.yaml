@@ -4,26 +4,16 @@ metadata:
   annotations:
     fluxcd.io/ignore: "false"
     linkerd.io/inject: enabled
-  name: redis-opensource
+  name: redis-prod
 ---
 apiVersion: redis.redis.opstreelabs.in/v1beta1
-kind: RedisCluster
+kind: Redis
 metadata:
-  name: redis-cluster
+  name: redis-prod
   namespace: redis-opensource
 spec:
-  clusterSize: 3
-  clusterVersion: v7
-  securityContext:
-    runAsUser: 1000
-    fsGroup: 1000
-  persistenceEnabled: true
   kubernetesConfig:
     image: 'quay.io/opstree/redis:v7.0.5'
-    imagePullPolicy: IfNotPresent
-  redisExporter:
-    enabled: true
-    image: 'quay.io/opstree/redis-exporter:v1.44.0'
     imagePullPolicy: IfNotPresent
   storage:
     volumeClaimTemplate:
@@ -33,3 +23,10 @@ spec:
         resources:
           requests:
             storage: 1Gi
+  redisExporter:
+    enabled: true
+    image: 'quay.io/opstree/redis-exporter:v1.44.0'
+    imagePullPolicy: IfNotPresent
+  securityContext:
+    runAsUser: 1000
+    fsGroup: 1000
