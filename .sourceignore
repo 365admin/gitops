@@ -6,4 +6,5 @@
 
 # Include manifest directories
 !/apps/
+!/routes/
 !/targets/
