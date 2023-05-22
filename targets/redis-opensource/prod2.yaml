@@ -6,6 +6,7 @@ metadata:
     linkerd.io/inject: enabled
   name: redis-prod
 ---
+# more
 apiVersion: redis.redis.opstreelabs.in/v1beta1
 kind: Redis
 metadata:
