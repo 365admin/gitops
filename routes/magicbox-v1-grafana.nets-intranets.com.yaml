@@ -1,17 +1,17 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: grafana
-  namespace: monitor
+  name: nets-intranets.com
+  namespace: gateway
 spec:
   rules:
-    - host: magicbox-v1-grafana.nets-intranets.com
+    - host: .nets-intranets.com
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: grafana-service
+                name: gateway-apisix-gateway
                 port:
-                  number: 3000
+                  number: 80
