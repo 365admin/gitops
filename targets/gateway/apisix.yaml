@@ -25,7 +25,7 @@ spec:
   interval: 5m
   chart:
     spec:
-      chart: apisix/apisix
+      chart: apisix
       sourceRef:
         kind: HelmRepository
         name: apiseven
@@ -43,7 +43,7 @@ spec:
   interval: 5m
   chart:
     spec:
-      chart: apisix/apisix-dashboard
+      chart: apisix-dashboard
       sourceRef:
         kind: HelmRepository
         name: apiseven 
