@@ -6,7 +6,6 @@ metadata:
     linkerd.io/inject: enabled
   name: magicbox-prod
 ---
-
 apiVersion: v1
 kind: Secret
 metadata:
