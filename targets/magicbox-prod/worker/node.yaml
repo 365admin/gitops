@@ -15,7 +15,7 @@ spec:
     spec: 
       containers:
       - name: worker
-        image: nielsgregers/magicbox-workers:v4
+        image: nielsgregers/magicbox-workers:v6
         env:
         - name: REDIS
           value: redis//redis-prod.redis-prod:6379
