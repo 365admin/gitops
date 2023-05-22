@@ -9,7 +9,7 @@ metadata:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: my-cluster-name-secrets
+  name: magicbox-prod-secrets
   namespace: magicbox-prod
 type: Opaque
 stringData:
@@ -26,6 +26,16 @@ stringData:
   PMM_SERVER_API_KEY: apikey
   #PMM_SERVER_USER: admin
   #PMM_SERVER_PASSWORD: admin
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: magicbox-prod-encryption-key
+  namespace: magicbox-prod
+type: Opaque
+data:
+  encryption-key: Y3ltNTdZbGo4Uyt4cHp5RERzTDBhcFBYVExxcXJhL2YyV0prNnVXZHBhTT0=
+
 ---
 apiVersion: psmdb.percona.com/v1
 kind: PerconaServerMongoDB
@@ -66,8 +76,8 @@ spec:
     schedule: "0 2 * * *"
     setFCV: false
   secrets:
-    users: my-cluster-name-secrets
-    encryptionKey: my-cluster-name-mongodb-encryption-key
+    users: magicbox-prod-secrets
+    encryptionKey: magicbox-prod-encryption-key
 #    vault: my-cluster-name-vault
   pmm:
     enabled: false
