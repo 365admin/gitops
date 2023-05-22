@@ -5,8 +5,7 @@ metadata:
   namespace: gateway
 spec:
   rules:
-    - host: .nets-intranets.com
-      http:
+    - http:
         paths:
           - path: /
             pathType: Prefix
