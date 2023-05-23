@@ -17,8 +17,10 @@ spec:
       - name: worker
         image: nielsgregers/magicbox-workers:v6
         env:
+        - name: DEBUG
+          value: magicbox*
         - name: REDIS
-          value: redis//redis-prod.redis-prod:6379
+          value: redis://redis-prod.redis-prod:6379
         - name: MONGO_SERVER
           value:  mongodb://databaseAdmin:databaseAdmin123456@prodmongo-mongos.percona:27017/?directConnection=true&authMechanism=DEFAULT
         - name: EXCHAPPID
