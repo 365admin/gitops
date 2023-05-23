@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+  namespace: magicbox-prod
+spec:
+  selector:
+    matchLabels:
+      app: web
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: web
+    spec: 
+      containers:
+      - name: worker
+        image: nielsgregers/magicbox-web:v0.0.1
+        env:
+        - name: DEBUG
+          value: magicbox*
+        - name: REDIS
+          value: redis://redis-prod.redis-prod:6379
+        - name: MONGO_SERVER
+          value:  mongodb://databaseAdmin:databaseAdmin123456@prodmongo-mongos.percona:27017/?directConnection=true&authMechanism=DEFAULT
+ 
