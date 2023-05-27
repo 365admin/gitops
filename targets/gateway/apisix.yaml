@@ -74,5 +74,10 @@ spec:
       interval: 1m
   values:
     replicaCount: 1
-   
-   
+    config:
+      apisix:
+        adminAPIVersion: v2    
+        serviceName: gateway-apisix-admin
+        serviceNamespace: gateway
+
+
