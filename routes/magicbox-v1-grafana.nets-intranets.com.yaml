@@ -21,3 +21,23 @@ spec:
                 name: gateway-apisix-gateway
                 port:
                   number: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: id.nets-intranets.com
+  namespace: identity
+  annotations:
+    kubernetes.io/ingress.class: nginx  
+spec:
+  rules:
+    - http:
+        paths:
+          - host: id.nets-intranets.com
+            path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: keycloak
+                port:
+                  number: 80
