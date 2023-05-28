@@ -35,6 +35,8 @@ spec:
     replicaCount: 2
     extraVolumes:
       - name: gateway-debug
+        configMap:
+           name: gateway-debug
         emptyDir: {}
     extraVolumeMounts:
     - name: gateway-debug
