@@ -33,6 +33,16 @@ spec:
       interval: 1m
   values:
     replicaCount: 2
+  # -- Additional `volume`, See [Kubernetes Volumes](https://kubernetes.io/docs/concepts/storage/volumes/) for the detail.
+  extraVolumes: []
+  # - name: extras
+  #   emptyDir: {}
+
+  # -- Additional `volume`, See [Kubernetes Volumes](https://kubernetes.io/docs/concepts/storage/volumes/) for the detail.
+  extraVolumeMounts: []
+  # - name: extras
+  #   mountPath: /usr/share/extras
+  #   readOnly: true
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
