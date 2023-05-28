@@ -33,15 +33,10 @@ spec:
       interval: 1m
   values:
     replicaCount: 2
-    extraVolumes:
-      - name: gateway-debug
-        configMap:
-           name: gateway-debug
-        emptyDir: {}
-    extraVolumeMounts:
-    - name: gateway-debug
-      mountPath: /usr/local/apisix/conf/debug.yaml
-      readOnly: false
+# ¨   extraVolumeMounts:
+#     - name: gateway-debug
+#       mountPath: /usr/local/apisix/conf/debug.yaml
+#       readOnly: false
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
