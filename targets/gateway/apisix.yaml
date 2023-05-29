@@ -22,6 +22,7 @@ metadata:
   namespace: gateway
 data:
   debug.yaml: |
+    # Niels
     basic:
       enable: true
     http_filter:
@@ -48,7 +49,7 @@ metadata:
   name: gateway
   namespace: gateway
 spec:
-  interval: 5m
+  interval: 10m
   chart:
     spec:
       chart: apisix
@@ -56,7 +57,7 @@ spec:
         kind: HelmRepository
         name: apiseven
         namespace: gateway
-      interval: 1m
+      interval: 10m
   values:
     replicaCount: 2
     # extraVolumes:
