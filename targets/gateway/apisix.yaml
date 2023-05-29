@@ -32,10 +32,10 @@ spec:
       interval: 1m
   values:
     replicaCount: 1
-    # extraVolumes:
-    #   - name: apisix-debug
-    #     configMap:
-    #        name: gateway-debug
+    extraVolumes:
+      - name: apisix-debug
+        configMap:
+           name: gateway-debug
     # extraVolumeMounts:
     # - name: apisix-debug
     #   mountPath: /usr/local/apisix/conf/debug.yaml
