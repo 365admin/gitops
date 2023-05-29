@@ -15,8 +15,8 @@ spec:
   interval: 5m0s
   url: https://charts.apiseven.com
 ---
-kind: ConfigMap
 apiVersion: v1
+kind: ConfigMap
 metadata:
   name: gateway-debug
   namespace: gateway
@@ -58,7 +58,7 @@ spec:
         namespace: gateway
       interval: 1m
   values:
-    replicaCount: 1
+    replicaCount: 2
     # extraVolumes:
     #   - name: apisix-debug
     #     configMap:
