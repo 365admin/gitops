@@ -31,6 +31,8 @@ spec:
         namespace: gateway
       interval: 1m
   values:
+    apisix:
+      - enable_debug: true
     replicaCount: 1
     extraVolumes:
       - name: apisix-debug
