@@ -21,7 +21,7 @@ spec:
         - name: DEBUG
           value: magicbox*
         - name: REDIS
-          value: redis://redis-prod.redis-prod:6379
+          value: redis://redis-prod.redis:6379
         - name: MONGO_SERVER
-          value:  mongodb://databaseAdmin:databaseAdmin123456@prodmongo-mongos.percona:27017/?directConnection=true&authMechanism=DEFAULT
+          value:  mongodb://databaseAdmin:databaseAdmin123456@prod-mongos.percona:27017/?directConnection=true&authMechanism=DEFAULT
  

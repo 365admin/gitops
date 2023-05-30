@@ -1,0 +1,1 @@
+helm install -f $PSScriptRoot/values.yaml nginx  oci://registry-1.docker.io/bitnamicharts/nginx-ingress-controller
