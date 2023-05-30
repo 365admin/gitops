@@ -1,24 +1,7 @@
-apiVersion: v1
-kind: Service
-metadata:
-  name: web
-  namespace: magicbox-prod
-  labels:
-    app: web
-    service: web
-spec:
-  ports:
-  - name: http
-    port: 5301
-    targetPort: 5301
-  selector:
-    app: web
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: web
-  namespace: magicbox-prod
 spec:
   selector:
     matchLabels:

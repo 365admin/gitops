@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "install-flux": "dotenv -- bash \"./recovery/20 install flux and gitops/20 install-flux.bash\"",
-    "bootstrap-flux": "dotenv -- bash \"./recovery/20 install flux and gitops/flux-bootstrap.bash\"",
+  
+    "bootstrap-flux": "dotenv -- bash \"./recovery/90 install flux and gitops/flux-bootstrap.bash\"",
     "test-env": "dotenv -- bash \"recovery/00 Prep/env.bash\""
   },
   "keywords": [],

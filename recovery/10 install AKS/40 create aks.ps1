@@ -1,1 +1,0 @@
-az aks create -g magicbox -n magicbox-v2 --enable-managed-identity --node-count 3  --generate-ssh-keys -o table 

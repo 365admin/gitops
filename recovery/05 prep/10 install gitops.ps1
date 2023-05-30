@@ -1,0 +1,1 @@
+bash $PSScriptRoot/gitops.bash
