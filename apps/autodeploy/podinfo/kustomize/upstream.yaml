@@ -4,6 +4,6 @@ metadata:
   name: podinfo
 spec:
   timeout:
-    connect: 5s
+    connect: 6s
     read: 11s
     send: 12s
