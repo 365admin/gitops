@@ -1,18 +1,17 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: karlo-dev.nets-intranets.com
+  name: nets-intranets.com
   annotations:
     kubernetes.io/ingress.class: nginx  
 spec:
   rules:
-    - host: karlo-dev.nets-intranets.com
-      http:
+    - http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: web
+                name: apisix-gateway
                 port:
-                  number: 5301
+                  number: 80

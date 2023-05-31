@@ -4,5 +4,5 @@ namespace: magicbox-prod
 resources:
   - deployment.yaml
   - service.yaml
-  - ingress.yaml
+
 

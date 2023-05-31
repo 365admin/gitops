@@ -1,0 +1,9 @@
+apiVersion: apisix.apache.org/v2
+kind: ApisixUpstream
+metadata:
+  name: podinfo
+spec:
+  timeout:
+    connect: 5s
+    read: 10s
+    send: 10s
