@@ -1,1 +1,0 @@
-helm install -f $PSScriptRoot/values.yaml grafana-operator  oci://registry-1.docker.io/bitnamicharts/grafana-operator

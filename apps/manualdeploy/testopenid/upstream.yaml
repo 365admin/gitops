@@ -1,0 +1,9 @@
+# httpbin-upstream.yaml
+apiVersion: apisix.apache.org/v2
+kind: ApisixUpstream
+metadata:
+  name: httpbin-upstream
+spec:
+  externalNodes:
+  - type: Domain
+    name: httpbin.org

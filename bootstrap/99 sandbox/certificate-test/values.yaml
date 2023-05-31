@@ -1,0 +1,45 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: demo-cert
+  namespace: gateway
+spec:
+  dnsNames:
+    - mb1.nets-intranets.com
+  issuerRef:
+    kind: Issuer
+    name: example-issuer
+  commonName: 'mb1.nets-intranets.com'
+  secretName: example-cert
+  usages:
+    - digital signature
+    - key encipherment
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: httpserver-ingress
+  namespace: gateway  
+  annotations:
+    # add an annotation indicating the issuer to use.
+    cert-manager.io/issuer: "example-issuer"
+spec:
+  # apisix-ingress-controller is only interested in Ingress
+  # resources with the matched ingressClass name, in our case,
+  # it's apisix.
+  ingressClassName: apisix
+  tls:
+    - hosts:
+        - mb1.nets-intranets.com # placing a host in the TLS config will determine what ends up in the cert's subjectAltNames
+      secretName: ingress-cert-manager-tls # cert-manager will store the created certificate in this secret.
+  rules:
+  - host: mb1.nets-intranets.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: httpbin
+            port:
+              number: 80   

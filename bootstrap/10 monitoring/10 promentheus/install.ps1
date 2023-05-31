@@ -1,1 +1,0 @@
-helm install -f $PSScriptRoot/values.yaml kube-prometheus  oci://registry-1.docker.io/bitnamicharts/prometheus

@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: cloudflare-api-token-secret
+type: Opaque
+stringData:
+  api-token: mNQuca9QhftCVtSvHn2nBy2oyqJYCXdq8Yod6gVd
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: cloudflare-api-key-secret
+type: Opaque
+stringData:
+  api-key: mNQuca9QhftCVtSvHn2nBy2oyqJYCXdq8Yod6gVd
+---
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: example-issuer
+spec:
+  acme:
+  # You must replace this email address with your own.
+    # Let's Encrypt will use this to contact you about expiring
+    # certificates, and issues related to your account.
+    email: niels.johansen@nexigroup.com
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      # Secret resource that will be used to store the account's private key.
+      name: staging-issuer-account-key
+    # Add a single challenge solver, HTTP01 using nginx
+    solvers:
+    - dns01:
+        cloudflare:
+          email: my-cloudflare-acc@example.com
+          apiKeySecretRef:
+            name: cloudflare-api-key-secret
+            key: api-key
+      selector:
+        dnsNames:
+        - 'nets-intranet.com'
+        - '*.nets-intranet.com'            
