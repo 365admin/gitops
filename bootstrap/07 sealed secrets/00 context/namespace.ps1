@@ -1,3 +1,3 @@
-$ns = "kube-system"
-kubectl create namespace $ns
+#$ns = "kube-system"
+#kubectl create namespace $ns
 kubens $ns
