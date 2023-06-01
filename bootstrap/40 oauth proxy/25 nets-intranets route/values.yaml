@@ -24,12 +24,13 @@ metadata:
   #  nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
 spec:
   rules:
-    - http:
+    - host: dddd.nets-intranets.com
+      http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: apisix-gateway
+                name: ddddauth-oauth2-proxy-svc
                 port:
-                  number: 80
+                  number: 4180

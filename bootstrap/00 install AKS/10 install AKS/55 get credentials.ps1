@@ -1,1 +1,1 @@
-az aks get-credentials --resource-group magicbox --name magicbox-prod 
+az aks get-credentials --resource-group magicbox --name magicbox-dev

@@ -1,0 +1,95 @@
+# {
+#   "_meta": {
+#     "disable": true
+#   },
+#   "bearer_only": false,
+#   "client_id": "902987fd-0ebd-4963-a92b-f200990bb176",
+#   "client_secret": "V6v8Q~nZiFy2bTbz0VHucnFUvCP~09RjtuiVpaT_",
+#   "disable": false,
+#   "discovery": "https://login.microsoftonline.com/79dc228f-c8f2-4016-8bf0-b990b6c72e98/v2.0/.well-known/openid-configuration",
+#   "introspection_endpoint": "https://login.microsoftonline.com/79dc228f-c8f2-4016-8bf0-b990b6c72e98/v2.0/.well-known/openid-configuration",
+#   "redirect_uri": "https://dddd.nets-intranets.com/redirect",
+#   "scope": "902987fd-0ebd-4963-a92b-f200990bb176/.default",
+#   "session": {
+#     "secret": "1234567890abcdef1234567890abcdef"
+#   }
+# }
+
+configuration:
+  ## @param configuration.clientID OAuth client ID
+  ##
+  clientID: "902987fd-0ebd-4963-a92b-f200990bb176"
+  ## @param configuration.clientSecret OAuth client secret
+  ##
+  clientSecret: "V6v8Q~nZiFy2bTbz0VHucnFUvCP~09RjtuiVpaT_"
+  ## Create a new secret with the following command openssl rand -base64 32 | head -c 32 | base64
+ 
+
+  content: |
+    email_domains = [ "*" ]
+    upstreams = [ "file:///dev/null" ]
+
+
+
+  ## @param configuration.oidcIssuerUrl OpenID Connect issuer URL
+  oidcIssuerUrl: ""
+
+  ## @param configuration.redirectUrl OAuth Redirect URL
+  redirectUrl: ""
+
+ 
+## @param containerPort OAuth2 Proxy port number
+##
+containerPort: 4180
+
+## @param replicaCount Number of OAuth2 Proxy replicas to deploy
+##
+replicaCount: 1
+
+## Configure extra options for OAuth2 Proxy containers' startup, liveness and readiness probes
+## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#configure-probes
+## @param startupProbe.enabled Enable startupProbe on OAuth2 Proxy nodes
+## @param startupProbe.initialDelaySeconds Initial delay seconds for startupProbe
+## @param startupProbe.periodSeconds Period seconds for startupProbe
+## @param startupProbe.timeoutSeconds Timeout seconds for startupProbe
+## @param startupProbe.failureThreshold Failure threshold for startupProbe
+## @param startupProbe.successThreshold Success threshold for startupProbe
+##
+startupProbe:
+  enabled: false
+  initialDelaySeconds: 0
+  periodSeconds: 10
+  timeoutSeconds: 1
+  failureThreshold: 5
+  successThreshold: 1
+## @param livenessProbe.enabled Enable livenessProbe on OAuth2 Proxy nodes
+## @param livenessProbe.initialDelaySeconds Initial delay seconds for livenessProbe
+## @param livenessProbe.periodSeconds Period seconds for livenessProbe
+## @param livenessProbe.timeoutSeconds Timeout seconds for livenessProbe
+## @param livenessProbe.failureThreshold Failure threshold for livenessProbe
+## @param livenessProbe.successThreshold Success threshold for livenessProbe
+##
+livenessProbe:
+  enabled: true
+  initialDelaySeconds: 0
+  periodSeconds: 10
+  timeoutSeconds: 1
+  failureThreshold: 5
+  successThreshold: 1
+## @param readinessProbe.enabled Enable readinessProbe on OAuth2 Proxy nodes
+## @param readinessProbe.initialDelaySeconds Initial delay seconds for readinessProbe
+## @param readinessProbe.periodSeconds Period seconds for readinessProbe
+## @param readinessProbe.timeoutSeconds Timeout seconds for readinessProbe
+## @param readinessProbe.failureThreshold Failure threshold for readinessProbe
+## @param readinessProbe.successThreshold Success threshold for readinessProbe
+##
+readinessProbe:
+  enabled: true
+  initialDelaySeconds: 0
+  periodSeconds: 10
+  timeoutSeconds: 1
+  failureThreshold: 5
+  successThreshold: 1
+
+
+
