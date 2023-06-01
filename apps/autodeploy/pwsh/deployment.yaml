@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: pwsh
+  name: pwsh2
 spec:
   selector:
     matchLabels:
-      app: pwsh
+      app: pwsh2
   replicas: 1
   template:
     metadata:
       labels:
-        app: pwsh
+        app: pwsh2
     spec: 
       containers:
-      - name: pwsh
+      - name: pwsh2
         image: ghcr.io/koksmat-com/pwsh:main
         env:
         - name: DEBUG
