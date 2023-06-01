@@ -14,7 +14,7 @@ spec:
     spec: 
       containers:
       - name: pwsh2
-        image: ghcr.io/koksmat-com/pwsh:main
+        image: ghcr.io/koksmat-com/pwsh:v0.1.0
         env:
         - name: DEBUG
           value: magicbox*
