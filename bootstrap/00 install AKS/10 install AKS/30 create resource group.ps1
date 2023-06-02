@@ -1,1 +1,1 @@
-az group create --name magicbox --location westeurope -o table
+az group create --name $ENV:AZ_RESGROUP --location westeurope -o table

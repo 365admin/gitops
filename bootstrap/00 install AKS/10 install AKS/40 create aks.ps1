@@ -1,1 +1,1 @@
-az aks create -g magicbox -n magicbox-dev --enable-managed-identity --node-count 4  --generate-ssh-keys -o table 
+az aks create -g $ENV:AZ_RESGROUP -n $ENV:AKS_CLUSTERNAME --enable-managed-identity --node-count 4  --generate-ssh-keys -o table 

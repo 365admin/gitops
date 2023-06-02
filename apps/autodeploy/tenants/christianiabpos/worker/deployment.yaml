@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: pwsh2
+  name: workers
 spec:
   selector:
     matchLabels:
-      app: pwsh2
-  replicas: 1
+      app: workers
+  replicas: 3
   template:
     metadata:
       labels:
-        app: pwsh2
+        app: workers
     spec: 
       containers:
-      - name: pwsh2
-        image: ghcr.io/koksmat-com/pwsh:v0.1.0
+      - name: worker
+        image: nielsgregers/magicbox-workers:v6
         env:
         - name: DEBUG
           value: magicbox*

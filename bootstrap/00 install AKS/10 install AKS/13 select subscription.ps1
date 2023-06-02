@@ -1,1 +1,1 @@
-az account set --subscription "Office365 admin" -o table
+az account set --subscription $ENV:AZ_SUBSCRIPTION -o table

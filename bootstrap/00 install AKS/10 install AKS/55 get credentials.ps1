@@ -1,1 +1,1 @@
-az aks get-credentials --resource-group magicbox --name magicbox-dev
+az aks get-credentials --resource-group $ENV:AZ_RESGROUP --name $ENV:AKS_CLUSTERNAME

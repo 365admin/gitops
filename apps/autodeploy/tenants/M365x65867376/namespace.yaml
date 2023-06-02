@@ -4,4 +4,4 @@ metadata:
   annotations:
     fluxcd.io/ignore: "false"
     linkerd.io/inject: enabled
-  name: magicbox-prod
+  name: magicbox-M365x65867376
