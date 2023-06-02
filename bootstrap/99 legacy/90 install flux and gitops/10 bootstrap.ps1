@@ -1,0 +1,1 @@
+bash $PSScriptRoot/flux-bootstrap.bash

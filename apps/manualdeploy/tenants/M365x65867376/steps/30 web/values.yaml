@@ -25,3 +25,18 @@ spec:
         - name: MONGO_SERVER
           value:  mongodb://databaseAdmin:databaseAdmin123456@prod-mongos.percona:27017/?directConnection=true&authMechanism=DEFAULT
  
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web
+  labels:
+    app: web
+    service: web
+spec:
+  ports:
+  - name: http
+    port: 5301
+    targetPort: 5301
+  selector:
+    app: web

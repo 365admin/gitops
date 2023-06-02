@@ -69,7 +69,7 @@ function Get-CookieSecret() {
 
 $applicationHostname= "host"
 $appRedirectUri = [uri]"$ApplicationUrl/oauth2/callback"
-$tempOutputPath =  "$PSScriptRoot/temp" #[System.IO.Path]::GetTempPath()
+$tempOutputPath =  "$PSScriptRoot/instance" #[System.IO.Path]::GetTempPath()
 
 # az login --tenant $TenantId --allow-no-subscriptions
 

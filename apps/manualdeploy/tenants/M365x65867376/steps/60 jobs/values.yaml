@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: pwsh2
 spec:
-  schedule: "*/10 * * * *"
+  schedule: "10 * * * *"
   jobTemplate:
     spec:
       parallelism: 1
