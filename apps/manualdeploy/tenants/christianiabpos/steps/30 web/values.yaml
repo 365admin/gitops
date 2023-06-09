@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+spec:
+  selector:
+    matchLabels:
+      app: web
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: web
+    spec: 
+      containers:
+      - name: web
+        image: nielsgregers/magicbox-web:v0.0.1
+        ports:
+          - containerPort: 5301
+        env:
+        - name: DEBUG
+          value: magicbox*
+        - name: REDIS
+          value: redis://redis-prod.redis:6379
+        - name: DATABASE
+          value: christianiabpos
+        - name: DATABASEADMIN
+          valueFrom:
+            secretKeyRef:
+              name: exchange
+              key: DATABASEADMIN
+        - name: DATABASEPASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: exchange
+              key: DATABASEPASSWORD
+        - name: DATABASEURL
+          valueFrom:
+            secretKeyRef:
+              name: exchange
+              key: DATABASEURL
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web
+  labels:
+    app: web
+    service: web
+spec:
+  ports:
+  - name: http
+    port: 5301
+    targetPort: 5301
+  selector:
+    app: web

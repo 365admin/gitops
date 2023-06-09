@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: importrooms
+  name: syncrecipients
 spec:
   schedule: "10 * * * *"
   jobTemplate:
@@ -22,7 +22,7 @@ spec:
             emptyDir: {}          
           containers:
           - name: pwsh
-            image: ghcr.io/koksmat-com/pwsh:v0.2.0
+            image: ghcr.io/koksmat-com/pwsh:v0.2.3
             command: ["pwsh"]
             args: ["-file", "./downloadRecipients.ps1"]               
             volumeMounts:
@@ -47,12 +47,15 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: exchange
-                  key: EXCHCERTIFICATE   
+                  key: EXCHCERTIFICATE  
+            - name: EXCHCERTIFICATEPASSWORD
+              value: ""
                           
           - name: koksmat-cli
-            image: ghcr.io/koksmat-com/koksmat:v0.2.0
+            image: ghcr.io/koksmat-com/koksmat:v0.2.5
             command: ["koksmat"]
-            args: ["-i", "recipents.json","-d","exchange","-s","recipients"]               
+            args: ["import","-i", "/exchange/recipents.json","-d","exchange","-s","recipients"]
+            # args: ["serve"]               
             volumeMounts:
             - name: shared-data
               mountPath: /exchange            
@@ -61,6 +64,12 @@ spec:
               value: magicbox*
             - name: DATAOUT
               value: /exchange
-            - name: MONGO_SERVER
-              value:  mongodb://databaseAdmin:databaseAdmin123456@prod-mongos.percona:27017/?directConnection=true&authMechanism=DEFAULT
+            - name: DATABASE
+              value: m365x65867376
+            - name: DATABASEADMIN
+              value: databaseAdmin
+            - name: DATABASEPASSWORD
+              value: tcmsJ4hGXqjiPeNwfbH
+            - name: DATABASEURL
+              value:  mongodb://prod-mongos.percona:27017
   

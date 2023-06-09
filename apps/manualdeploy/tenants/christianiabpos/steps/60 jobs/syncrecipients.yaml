@@ -1,0 +1,86 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: syncrecipients
+spec:
+  schedule: "*/15 * * * *"
+  jobTemplate:
+    spec:
+      parallelism: 1
+      completions: 1
+      activeDeadlineSeconds: 1200
+      backoffLimit: 3
+
+      template:
+        metadata:
+          labels:
+            app: pwsh2
+        spec: 
+          restartPolicy: Never
+          volumes:
+          - name: shared-data
+            emptyDir: {}          
+          containers:
+          - name: pwsh
+            image: ghcr.io/koksmat-com/pwsh:v0.2.4
+            command: ["pwsh"]
+            args: ["-file", "./downloadRecipients.ps1"]               
+            volumeMounts:
+            - name: shared-data
+              mountPath: /exchange            
+            env:
+            - name: DEBUG
+              value: magicbox*
+            - name: DATAOUT
+              value: /exchange
+            - name: EXCHAPPID
+              valueFrom:
+                secretKeyRef:
+                  name: exchange
+                  key: EXCHAPPID
+            - name: EXCHORGANIZATION  
+              valueFrom:
+                secretKeyRef:
+                  name: exchange
+                  key: EXCHORGANIZATION   
+            - name: EXCHCERTIFICATE
+              valueFrom:
+                secretKeyRef:
+                  name: exchange
+                  key: EXCHCERTIFICATE  
+            - name: EXCHCERTIFICATEPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: exchange
+                  key: EXCHCERTIFICATEPASSWORD  
+                          
+          - name: koksmat-cli
+            image: ghcr.io/koksmat-com/koksmat:v0.2.5
+            command: ["koksmat"]
+            args: ["import","-i", "/exchange/recipents.json","-d","exchange","-s","recipients"]
+            # args: ["serve"]               
+            volumeMounts:
+            - name: shared-data
+              mountPath: /exchange            
+            env:
+            - name: DEBUG
+              value: magicbox*
+            - name: DATAOUT
+              value: /exchange
+            - name: DATABASE
+              value: christianiabpos
+            - name: DATABASEADMIN
+              valueFrom:
+                secretKeyRef:
+                  name: exchange
+                  key: DATABASEADMIN
+            - name: DATABASEPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: exchange
+                  key: DATABASEPASSWORD
+            - name: DATABASEURL
+              valueFrom:
+                secretKeyRef:
+                  name: exchange
+                  key: DATABASEURL

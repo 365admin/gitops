@@ -20,8 +20,6 @@ spec:
           value: magicbox*
         - name: REDIS
           value: redis://redis-prod.redis:6379
-        - name: MONGO_SERVER
-          value:  mongodb://databaseAdmin:databaseAdmin123456@prod-mongos.percona:27017/?directConnection=true&authMechanism=DEFAULT
         - name: EXCHAPPID
           valueFrom:
             secretKeyRef:
@@ -38,4 +36,7 @@ spec:
               name: exchange
               key: EXCHCERTIFICATE  
         - name: EXCHCERTIFICATEPASSWORD
-          value: ""
+          valueFrom:
+            secretKeyRef:
+              name: exchange
+              key: EXCHCERTIFICATEPASSWORD                
