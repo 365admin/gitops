@@ -14,7 +14,7 @@ spec:
     spec: 
       containers:
       - name: koksmat-cli
-        image: ghcr.io/koksmat-com/koksmat:v0.3.1
+        image: ghcr.io/koksmat-com/koksmat:v0.4.1
         ports:
           - containerPort: 5001
         command: ["koksmat"]
@@ -25,7 +25,7 @@ spec:
         - name: DATAOUT
           value: /exchange
         - name: DATABASE
-          value: m365x65867376
+          value: christianiabpos
         - name: DATABASEADMIN
           value: databaseAdmin
         - name: DATABASEPASSWORD

@@ -3,12 +3,12 @@ kind: CronJob
 metadata:
   name: syncrecipients
 spec:
-  schedule: "*/15 * * * *"
+  schedule: "*/30 * * * *"
   jobTemplate:
     spec:
       parallelism: 1
       completions: 1
-      activeDeadlineSeconds: 1200
+      activeDeadlineSeconds: 2400
       backoffLimit: 3
 
       template:
@@ -22,7 +22,7 @@ spec:
             emptyDir: {}          
           containers:
           - name: pwsh
-            image: ghcr.io/koksmat-com/pwsh:v0.2.4
+            image: ghcr.io/koksmat-com/pwsh:v0.2.5
             command: ["pwsh"]
             args: ["-file", "./downloadRecipients.ps1"]               
             volumeMounts:
@@ -80,7 +80,4 @@ spec:
                   name: exchange
                   key: DATABASEPASSWORD
             - name: DATABASEURL
-              valueFrom:
-                secretKeyRef:
-                  name: exchange
-                  key: DATABASEURL
+              value:  mongodb://prod-mongos.percona:27017
