@@ -1,0 +1,17 @@
+nats: 
+  jetstream:
+    domain: null
+    enabled: true
+    encryption: null
+    fileStorage:
+      accessModes:
+      - ReadWriteOnce
+      annotations: null
+      enabled: true
+      size: 10Gi
+      storageDirectory: /data
+    max_outstanding_catchup: null
+    memStorage:
+      enabled: true
+      size: 1Gi
+    uniqueTag: null

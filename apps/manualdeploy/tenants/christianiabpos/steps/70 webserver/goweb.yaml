@@ -14,7 +14,7 @@ spec:
     spec: 
       containers:
       - name: koksmat-cli
-        image: ghcr.io/koksmat-com/koksmat:v0.6.4
+        image: ghcr.io/koksmat-com/koksmat:v1.0.5
         ports:
           - containerPort: 5001
         command: ["koksmat"]
@@ -34,6 +34,27 @@ spec:
           value:  mongodb://prod-mongos.percona:27017
         - name: MAGICBOXURL
           value: http://web:5301/api/v1/exchange/sharedmailbox
+        - name: EXCHAPPID
+          valueFrom:
+            secretKeyRef:
+              name: exchange
+              key: EXCHAPPID
+        - name: EXCHORGANIZATION  
+          valueFrom:
+            secretKeyRef:
+              name: exchange
+              key: EXCHORGANIZATION   
+        - name: EXCHCERTIFICATE
+          valueFrom:
+            secretKeyRef:
+              name: exchange
+              key: EXCHCERTIFICATE  
+        - name: EXCHCERTIFICATEPASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: exchange
+              key: EXCHCERTIFICATEPASSWORD                
+
 ---
 apiVersion: v1
 kind: Service
