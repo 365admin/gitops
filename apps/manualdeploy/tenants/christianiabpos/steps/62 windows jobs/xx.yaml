@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample
+  labels:
+    app: sample
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: sample
+      labels:
+        app: sample
+    spec:
+      nodeSelector:
+        "kubernetes.io/os": windows
+      containers:
+      - name: sample
+        image: ghcr.io/koksmat-com/powershell:latest
+        command: ["powershell"]
+        args: ["-file","sleep.ps1"]
+
+
+  selector:
+    matchLabels:
+      app: sample
