@@ -1,0 +1,64 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: sync-nexiintra-sites
+spec:
+  schedule: "*/10 * * * *"
+  jobTemplate:
+    spec:
+      parallelism: 1
+      completions: 1
+      activeDeadlineSeconds: 2400
+      backoffLimit: 3
+
+      template:
+        metadata:
+          labels:
+            app: pwsh2
+        spec: 
+          restartPolicy: Never
+        
+          containers:
+          - name: koksmat-cli
+            image: ghcr.io/koksmat-com/koksmat:v1.0.10
+            command: ["koksmat"]
+            args: ["sync","sites", "-hub","b80f09f2-c5e5-4f69-9944-33e8fe18a96c"]
+            # args: ["serve"]               
+            volumeMounts:
+            - name: shared-data
+              mountPath: /exchange            
+            env:
+            - name: DATABASE
+              value: christianiabpos
+            - name: DATABASEADMIN
+              valueFrom:
+                secretKeyRef:
+                  name: exchange
+                  key: DATABASEADMIN
+            - name: PNPAPPID
+              valueFrom:
+                secretKeyRef:
+                  name: sharepoint
+                  key: PNPAPPID
+            - name: PNPTENANTID
+              valueFrom:
+                secretKeyRef:
+                  name: sharepoint
+                  key: PNPTENANTID
+            - name: PNPCERTIFICATE
+              valueFrom:
+                secretKeyRef:
+                  name: sharepoint
+                  key: PNPCERTIFICATE  
+            - name: PNPSITE
+              valueFrom:
+                secretKeyRef:
+                  name: sharepoint
+                  key: PNPSITE                                                                      
+            - name: DATABASEPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: exchange
+                  key: DATABASEPASSWORD
+            - name: DATABASEURL
+              value:  mongodb://prod-mongos.percona:27017
