@@ -20,7 +20,7 @@ spec:
         
           containers:
           - name: koksmat-cli
-            image: ghcr.io/koksmat-com/koksmat:v1.0.10
+            image: ghcr.io/koksmat-com/koksmat:v1.0.12
             command: ["koksmat"]
             args: ["sync","sites", "--hubSiteId","b80f09f2-c5e5-4f69-9944-33e8fe18a96c"]                     
             env:

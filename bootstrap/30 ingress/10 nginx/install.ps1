@@ -1,1 +1,2 @@
-helm install -f $PSScriptRoot/values.yaml nginx  oci://registry-1.docker.io/bitnamicharts/nginx-ingress-controller
+#helm install -f $PSScriptRoot/values.yaml nginx  oci://registry-1.docker.io/bitnamicharts/nginx-ingress-controller  --set controller.config.large-client-header-buffers='"4 8k"'
+helm upgrade -f $PSScriptRoot/values.yaml nginx  oci://registry-1.docker.io/bitnamicharts/nginx-ingress-controller  --set controller.config.large-client-header-buffers='"4 8k"'

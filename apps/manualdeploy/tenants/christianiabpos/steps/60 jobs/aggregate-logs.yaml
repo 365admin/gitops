@@ -1,0 +1,42 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: aggregate-logs
+spec:
+  schedule: "10 * * * *"
+  jobTemplate:
+    spec:
+      parallelism: 1
+      completions: 1
+      activeDeadlineSeconds: 14400
+      backoffLimit: 3
+
+      template:
+        metadata:
+          labels:
+            app: pwsh2
+        spec: 
+          restartPolicy: Never
+    
+          containers:
+                   
+          - name: koksmat-cli
+            image: ghcr.io/koksmat-com/koksmat:v1.0.18
+            command: ["koksmat"]
+            args: ["sync","auditlogs"]    
+            env:
+            - name: DATABASE
+              value: christianiabpos
+            - name: DATABASEADMIN
+              valueFrom:
+                secretKeyRef:
+                  name: exchange
+                  key: DATABASEADMIN
+            - name: DATABASEPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: exchange
+                  key: DATABASEPASSWORD
+            - name: DATABASEURL
+              value:  mongodb://prod-mongos.percona:27017
+  
