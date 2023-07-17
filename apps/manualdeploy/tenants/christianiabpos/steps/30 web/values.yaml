@@ -14,31 +14,17 @@ spec:
     spec: 
       containers:
       - name: web
-        image: ghcr.io/koksmat-com/magicbox:v0.0.2
+        image: ghcr.io/koksmat-com/magicbox:v0.1.2
         ports:
           - containerPort: 5301
         env:
         - name: DEBUG
           value: magicbox*
-        - name: REDIS
-          value: redis://redis-prod.redis:6379
-        - name: DATABASE
-          value: christianiabpos
-        - name: DATABASEADMIN
-          valueFrom:
-            secretKeyRef:
-              name: exchange
-              key: DATABASEADMIN
-        - name: DATABASEPASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: exchange
-              key: DATABASEPASSWORD
-        - name: DATABASEURL
-          valueFrom:
-            secretKeyRef:
-              name: exchange
-              key: DATABASEURL
+        - name: KOKSMAT_HOST
+          value: "https://magicbox.nexi-intra.com"
+        - name: KOKSMAT_APPKEY
+          value: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOiJuaWVscyIsImtleSI6Ilx1MDAyNjFEQ1BhIU92ZkVxNGtOYCRIOU13WnJlbzU2eVlsUi1eXHUwMDNjaXNMZG5UYzJiVldRcGdYNzBCdEt7M3hTSXpcInxHOCIsIm5iZiI6MjM0fQ.Soo-yOAV-Zl-wR_BheO4qS29W9xqcpEr3BWy5hZJCA8"
+
 ---
 apiVersion: v1
 kind: Service
