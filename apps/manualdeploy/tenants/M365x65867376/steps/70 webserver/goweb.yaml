@@ -14,7 +14,7 @@ spec:
     spec: 
       containers:
       - name: koksmat-cli
-        image: ghcr.io/koksmat-com/koksmat:v1.0.8
+        image: ghcr.io/koksmat-com/koksmat:v1.0.23
         ports:
           - containerPort: 5001
         command: ["koksmat"]

@@ -14,12 +14,14 @@ spec:
     spec: 
       containers:
       - name: web
-        image: ghcr.io/koksmat-com/magicbox:v0.1.2
+        image: ghcr.io/koksmat-com/magicbox:v0.1.6
         ports:
           - containerPort: 5301
         env:
         - name: DEBUG
           value: magicbox*
+        - name: NEXTAUTH_SECRET
+          value: 1fdas325esdv
         - name: KOKSMAT_HOST
           value: "https://magicbox.nexi-intra.com"
         - name: KOKSMAT_APPKEY
