@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+spec:
+  selector:
+    matchLabels:
+      app: web
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: web
+    spec: 
+      containers:
+      - name: web
+        image: ghcr.io/koksmat-com/ui:v0.0.12
+        ports:
+          - containerPort: 3001
+        env:
+        - name: DEBUG
+          value: magicbox*
+        - name: NEXTAUTH_URL
+          value: https://home.nexi-intra.com
+        - name: NEXTAUTH_SECRET
+          value: 1fdas325esdv
+        - name: KOKSMAT_HOST
+          value: "https://magicbox.nexi-intra.com"
+        - name: KOKSMAT_APPKEY
+          value: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOiJuaWVscyIsImtleSI6Ilx1MDAyNjFEQ1BhIU92ZkVxNGtOYCRIOU13WnJlbzU2eVlsUi1eXHUwMDNjaXNMZG5UYzJiVldRcGdYNzBCdEt7M3hTSXpcInxHOCIsIm5iZiI6MjM0fQ.Soo-yOAV-Zl-wR_BheO4qS29W9xqcpEr3BWy5hZJCA8"
+        - name: AZURE_AD_CLIENT_ID
+          value: 902987fd-0ebd-4963-a92b-f200990bb176
+        - name: AZURE_AD_CLIENT_SECRET
+          value: x7B8Q~hkBRvVk3kaewNZhCfkdhXwiw2cRq8wbaWS
+        - name: AZURE_AD_TENANT_ID
+          value: 79dc228f-c8f2-4016-8bf0-b990b6c72e98
+        - name: GITHUB_ID
+          value: Iv1.831c3577bb626e67
+        - name: GITHUB_SECRET
+          value: 68b2b3d7eba96a30def12179307a557118ad5df1
+        - name: MONGODB
+          value: mongodb://databaseAdmin:tcmsJ4hGXqjiPeNwfbH@prod-mongos.percona:27017/?directConnection=true&authMechanism=DEFAULT&tls=false
+        - name: DATABASE
+          value: christianiabpos
+        - name: SPAUTH_CLIENTID
+          valueFrom:
+            secretKeyRef:
+              name: sharepoint
+              key: SPAUTH_CLIENTID      
+        - name: SPAUTH_CLIENTSECRET
+          valueFrom: 
+            secretKeyRef:
+              name: sharepoint
+              key: SPAUTH_CLIENTSECRET      
+        - name: SPAUTH_SITEURL
+          valueFrom:
+            secretKeyRef:
+              name: sharepoint
+              key: SPAUTH_SITEURL     
+        - name: SPAUTH_TENANTID
+          valueFrom:
+            secretKeyRef:
+              name: sharepoint
+              key: SPAUTH_TENANTID 
+        - name: SPAUTH_TENANTNAME
+          valueFrom:
+            secretKeyRef:
+              name: sharepoint
+              key: SPAUTH_TENANTNAME      
+      
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web
+  labels:
+    app: web
+    service: web
+spec:
+  ports:
+  - name: http
+    port: 5301
+    targetPort: 3001
+  selector:
+    app: web
