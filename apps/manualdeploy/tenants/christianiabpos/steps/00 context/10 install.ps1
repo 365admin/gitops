@@ -8,4 +8,4 @@ $current = kubens -c
 if ($current -ne $ns) {
     kubens $ns
 }
-Write-Output "Current namespace: $ns"
+kubens

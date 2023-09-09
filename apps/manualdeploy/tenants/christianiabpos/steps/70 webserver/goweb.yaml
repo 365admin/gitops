@@ -14,7 +14,7 @@ spec:
     spec: 
       containers:
       - name: koksmat-cli
-        image: ghcr.io/koksmat-com/koksmat:v1.0.32
+        image: ghcr.io/koksmat-com/koksmat:v1.0.33
         ports:
           - containerPort: 5001
         command: ["koksmat"]
@@ -79,9 +79,29 @@ spec:
               secretKeyRef:
                 name: sharepoint
                 key: SPAUTH_TENANTNAME      
-                     
+          - name: PNPAPPID
+            valueFrom:
+              secretKeyRef:
+                name: sharepoint
+                key: PNPAPPID     
+          - name: PNPCERTIFICATE
+            valueFrom:
+              secretKeyRef:
+                name: sharepoint
+                key: PNPCERTIFICATE 
+          - name: PNPSITE
+            valueFrom:
+              secretKeyRef:
+                name: sharepoint
+                key: PNPSITE      
+          - name: PNPTENANTID
+            valueFrom:
+              secretKeyRef:
+                name: sharepoint
+                key: PNPTENANTID                               
+                           
       - name: koksmat-sharepoint
-        image: ghcr.io/koksmat-com/koksmat:v1.0.32
+        image: ghcr.io/koksmat-com/koksmat:v1.0.33
         ports:
           - containerPort: 4321
         command: ["koksmat"]
@@ -146,9 +166,29 @@ spec:
               secretKeyRef:
                 name: sharepoint
                 key: SPAUTH_TENANTNAME      
-  
+          - name: PNPAPPID
+            valueFrom:
+              secretKeyRef:
+                name: sharepoint
+                key: PNPAPPID     
+          - name: PNPCERTIFICATE
+            valueFrom:
+              secretKeyRef:
+                name: sharepoint
+                key: PNPCERTIFICATE 
+          - name: PNPSITE
+            valueFrom:
+              secretKeyRef:
+                name: sharepoint
+                key: PNPSITE      
+          - name: PNPTENANTID
+            valueFrom:
+              secretKeyRef:
+                name: sharepoint
+                key: PNPTENANTID                               
+        
       - name: koksmat-admin
-        image: ghcr.io/koksmat-com/koksmat:v1.0.32
+        image: ghcr.io/koksmat-com/koksmat:v1.0.33
         ports:
           - containerPort: 4322
         command: ["koksmat"]
@@ -213,7 +253,26 @@ spec:
             secretKeyRef:
               name: sharepoint
               key: SPAUTH_TENANTNAME      
-                            
+        - name: PNPAPPID
+          valueFrom:
+            secretKeyRef:
+              name: sharepoint
+              key: PNPAPPID     
+        - name: PNPCERTIFICATE
+          valueFrom:
+            secretKeyRef:
+              name: sharepoint
+              key: PNPCERTIFICATE 
+        - name: PNPSITE
+          valueFrom:
+            secretKeyRef:
+              name: sharepoint
+              key: PNPSITE      
+        - name: PNPTENANTID
+          valueFrom:
+            secretKeyRef:
+              name: sharepoint
+              key: PNPTENANTID                               
 
 ---
 apiVersion: v1

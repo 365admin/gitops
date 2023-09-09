@@ -6,6 +6,8 @@ if (!$spaces -contains $ns) {
 }
 $current = kubens -c
 if ($current -ne $ns) {
+    Write-Output "Switching namespace to $ns"
     kubens $ns
 }
-Write-Output "Current namespace: $ns"
+#Write-Output "Current namespace: $ns"
+kubens
