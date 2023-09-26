@@ -14,7 +14,7 @@ spec:
     spec: 
       containers:
       - name: web
-        image: ghcr.io/koksmat-com/ui:v0.0.28
+        image: ghcr.io/koksmat-com/ui:v0.0.30
         ports:
           - containerPort: 3001
         env:
