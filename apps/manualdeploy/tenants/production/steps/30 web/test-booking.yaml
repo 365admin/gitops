@@ -1,27 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: webtest
+  name: webtestbooking
 spec:
   selector:
     matchLabels:
-      app: webtest
+      app: webtestbooking
   replicas: 1
   template:
     metadata:
       labels:
-        app: webtest
+        app: webtestbooking
     spec: 
       containers:
-      - name: webtest
-        image: ghcr.io/koksmat-com/ui:v0.0.30
+      - name: webtestbooking
+        image: ghcr.io/koksmat-com/ui:booking-2023-10
         ports:
           - containerPort: 3001
         env:
         - name: DEBUG
           value: "magicbox*"
         - name: NEXTAUTH_URL
-          value: https://home-test.nexi-intra.com
+          value: https://booking-test.nexi-intra.com
         - name: NEXTAUTH_SECRET
           value: 1fdas325esdv
         - name: KOKSMAT_HOST
@@ -74,15 +74,15 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: webtest
+  name: webtestbooking
   labels:
-    app: webtest
-    service: webtest
+    app: webtestbooking
+    service: webtestbooking
 spec:
   ports:
   - name: http
     port: 5301
     targetPort: 3001
   selector:
-    app: webtest
+    app: webtestbooking
 
