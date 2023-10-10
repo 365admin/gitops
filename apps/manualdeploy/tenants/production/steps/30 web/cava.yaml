@@ -1,27 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: web
+  name: webcava
 spec:
   selector:
     matchLabels:
-      app: web
-  replicas: 5
+      app: webcava
+  replicas: 1
   template:
     metadata:
       labels:
-        app: web
+        app: webcava
     spec: 
       containers:
-      - name: web
-        image: ghcr.io/koksmat-com/ui:v1.0.0.profile-3
+      - name: webcava
+        image: ghcr.io/koksmat-com/ui:v1.0.0.cava3-release1
         ports:
           - containerPort: 3001
         env:
         - name: DEBUG
-          value: magicbox*
+          value: "magicbox*"
         - name: NEXTAUTH_URL
-          value: https://home.nexi-intra.com
+          value: https://cava.nexi-intra.com
         - name: NEXTAUTH_SECRET
           value: 1fdas325esdv
         - name: KOKSMAT_HOST
@@ -67,19 +67,22 @@ spec:
             secretKeyRef:
               name: sharepoint
               key: SPAUTH_TENANTNAME      
-      
+       
+    
+ 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: web
+  name: webcava
   labels:
-    app: web
-    service: web
+    app: webcava
+    service: webcava
 spec:
   ports:
   - name: http
     port: 5301
     targetPort: 3001
   selector:
-    app: web
+    app: webcava
+
