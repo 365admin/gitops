@@ -272,7 +272,182 @@ spec:
           valueFrom:
             secretKeyRef:
               name: sharepoint
-              key: PNPTENANTID                               
+              key: PNPTENANTID             
+
+      - name: koksmat-admin
+        image: ghcr.io/koksmat-com/koksmat:v1.0.33
+        ports:
+          - containerPort: 4322
+        command: ["koksmat"]
+        args: ["serve","admin"]               
+        env:
+        - name: DEBUG
+          value: magicbox*
+        - name: DATAOUT
+          value: /exchange
+        - name: DATABASE
+          value: christianiabpos
+        - name: DATABASEADMIN
+          value: databaseAdmin
+        - name: DATABASEPASSWORD
+          value: tcmsJ4hGXqjiPeNwfbH
+        - name: DATABASEURL
+          value:  mongodb://prod-mongos.percona:27017
+        - name: MAGICBOXURL
+          value: http://web:5301/api/v1/exchange/sharedmailbox
+        - name: EXCHAPPID
+          valueFrom:
+            secretKeyRef:
+              name: exchange
+              key: EXCHAPPID
+        - name: EXCHORGANIZATION  
+          valueFrom:
+            secretKeyRef:
+              name: exchange
+              key: EXCHORGANIZATION   
+        - name: EXCHCERTIFICATE
+          valueFrom:
+            secretKeyRef:
+              name: exchange
+              key: EXCHCERTIFICATE  
+        - name: EXCHCERTIFICATEPASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: exchange
+              key: EXCHCERTIFICATEPASSWORD      
+        - name: SPAUTH_CLIENTID
+          valueFrom:
+            secretKeyRef:
+              name: sharepoint
+              key: SPAUTH_CLIENTID      
+        - name: SPAUTH_CLIENTSECRET
+          valueFrom: 
+            secretKeyRef:
+              name: sharepoint
+              key: SPAUTH_CLIENTSECRET      
+        - name: SPAUTH_SITEURL
+          valueFrom:
+            secretKeyRef:
+              name: sharepoint
+              key: SPAUTH_SITEURL     
+        - name: SPAUTH_TENANTID
+          valueFrom:
+            secretKeyRef:
+              name: sharepoint
+              key: SPAUTH_TENANTID 
+        - name: SPAUTH_TENANTNAME
+          valueFrom:
+            secretKeyRef:
+              name: sharepoint
+              key: SPAUTH_TENANTNAME      
+        - name: PNPAPPID
+          valueFrom:
+            secretKeyRef:
+              name: sharepoint
+              key: PNPAPPID     
+        - name: PNPCERTIFICATE
+          valueFrom:
+            secretKeyRef:
+              name: sharepoint
+              key: PNPCERTIFICATE 
+        - name: PNPSITE
+          valueFrom:
+            secretKeyRef:
+              name: sharepoint
+              key: PNPSITE      
+        - name: PNPTENANTID
+          valueFrom:
+            secretKeyRef:
+              name: sharepoint
+              key: PNPTENANTID     
+
+                                
+      - name: koksmat-all
+        image: ghcr.io/koksmat-com/koksmat:v1.0.33
+        ports:
+          - containerPort: 4300
+        command: ["koksmat"]
+        args: ["serve","all"]               
+        env:
+        - name: DEBUG
+          value: magicbox*
+        - name: DATAOUT
+          value: /exchange
+        - name: DATABASE
+          value: christianiabpos
+        - name: DATABASEADMIN
+          value: databaseAdmin
+        - name: DATABASEPASSWORD
+          value: tcmsJ4hGXqjiPeNwfbH
+        - name: DATABASEURL
+          value:  mongodb://prod-mongos.percona:27017
+        - name: MAGICBOXURL
+          value: http://web:5301/api/v1/exchange/sharedmailbox
+        - name: EXCHAPPID
+          valueFrom:
+            secretKeyRef:
+              name: exchange
+              key: EXCHAPPID
+        - name: EXCHORGANIZATION  
+          valueFrom:
+            secretKeyRef:
+              name: exchange
+              key: EXCHORGANIZATION   
+        - name: EXCHCERTIFICATE
+          valueFrom:
+            secretKeyRef:
+              name: exchange
+              key: EXCHCERTIFICATE  
+        - name: EXCHCERTIFICATEPASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: exchange
+              key: EXCHCERTIFICATEPASSWORD      
+        - name: SPAUTH_CLIENTID
+          valueFrom:
+            secretKeyRef:
+              name: sharepoint
+              key: SPAUTH_CLIENTID      
+        - name: SPAUTH_CLIENTSECRET
+          valueFrom: 
+            secretKeyRef:
+              name: sharepoint
+              key: SPAUTH_CLIENTSECRET      
+        - name: SPAUTH_SITEURL
+          valueFrom:
+            secretKeyRef:
+              name: sharepoint
+              key: SPAUTH_SITEURL     
+        - name: SPAUTH_TENANTID
+          valueFrom:
+            secretKeyRef:
+              name: sharepoint
+              key: SPAUTH_TENANTID 
+        - name: SPAUTH_TENANTNAME
+          valueFrom:
+            secretKeyRef:
+              name: sharepoint
+              key: SPAUTH_TENANTNAME      
+        - name: PNPAPPID
+          valueFrom:
+            secretKeyRef:
+              name: sharepoint
+              key: PNPAPPID     
+        - name: PNPCERTIFICATE
+          valueFrom:
+            secretKeyRef:
+              name: sharepoint
+              key: PNPCERTIFICATE 
+        - name: PNPSITE
+          valueFrom:
+            secretKeyRef:
+              name: sharepoint
+              key: PNPSITE      
+        - name: PNPTENANTID
+          valueFrom:
+            secretKeyRef:
+              name: sharepoint
+              key: PNPTENANTID     
 
 ---
 apiVersion: v1
@@ -317,5 +492,20 @@ spec:
   - name: http
     port: 4322
     targetPort: 4322
+  selector:
+    app: goweb
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: koksmat-all
+  labels:
+    app: goweb
+    service: goweb
+spec:
+  ports:
+  - name: http
+    port: 4300
+    targetPort: 4300
   selector:
     app: goweb

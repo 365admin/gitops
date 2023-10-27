@@ -1,0 +1,1 @@
+helm install pmm --set service.type="LoadBalancer" percona/pmm

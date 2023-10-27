@@ -1,1 +1,0 @@
-kubectl create -f $PSScriptRoot/values.yaml

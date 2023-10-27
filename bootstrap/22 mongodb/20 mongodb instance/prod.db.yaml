@@ -40,7 +40,7 @@ spec:
     encryptionKey: prod-mongodb-encryption-key
 #    vault: prod-vault
   pmm:
-    enabled: false
+    enabled: true
     image: percona/pmm-client:2.35.0
     serverHost: monitoring-service
 #    mongodParams: --environment=ENVIRONMENT
