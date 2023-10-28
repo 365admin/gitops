@@ -1,1 +1,1 @@
-helm install pmm --set service.type="LoadBalancer" percona/pmm
+helm install pmm --set service.type="ClusterIP" percona/pmm
