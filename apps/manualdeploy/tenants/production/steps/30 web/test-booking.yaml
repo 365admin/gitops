@@ -14,7 +14,7 @@ spec:
     spec: 
       containers:
       - name: webtestbooking
-        image: ghcr.io/koksmat-com/ui:v1.0.0.booking-2
+        image: ghcr.io/koksmat-com/ui:v1.0.0.booking-10
         ports:
           - containerPort: 3001
         env:
@@ -40,6 +40,8 @@ spec:
           value: 68b2b3d7eba96a30def12179307a557118ad5df1
         - name: MONGODB
           value: mongodb://databaseAdmin:tcmsJ4hGXqjiPeNwfbH@prod-mongos.percona:27017/?directConnection=true&authMechanism=DEFAULT&tls=false
+        - name: MONGODBBOOKING
+          value: mongodb://databaseAdmin:LYr57hTlcuSg5C2bNM@booking-mongos.percona:27017/?directConnection=true&authMechanism=DEFAULT&tls=false
         - name: DATABASE
           value: christianiabpos
         - name: SPAUTH_CLIENTID

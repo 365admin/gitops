@@ -1,7 +1,7 @@
 apiVersion: psmdb.percona.com/v1
 kind: PerconaServerMongoDB
 metadata:
-  name: prod
+  name: intranet
   finalizers:
     - delete-psmdb-pods-in-order
 #    - delete-psmdb-pvc
@@ -36,8 +36,8 @@ spec:
     schedule: "0 2 * * *"
     setFCV: false
   secrets:
-    users: prod-secrets
-    encryptionKey: prod-mongodb-encryption-key
+    users: intranet-secrets
+    encryptionKey: intranet-mongodb-encryption-key
 #    vault: prod-vault
   pmm:
     enabled: true
@@ -482,7 +482,7 @@ spec:
       azure-blob:
         type: azure
         azure:
-          container: prod-backup-container
+          container: intranet-backup-container
           prefix: psmdb
           credentialsSecret: my-cluster-azure-secret
     pitr:

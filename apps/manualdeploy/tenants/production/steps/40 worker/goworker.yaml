@@ -1,0 +1,103 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: goworker
+spec:
+  selector:
+    matchLabels:
+      app: goworker
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: goworker
+    spec: 
+      containers:
+      - name: koksmat-cli
+        image: ghcr.io/koksmat-com/koksmat:v1.0.36
+        command: ["koksmat"]
+        args: ["work","exchange"]               
+        env:
+          - name: DEBUG
+            value: magicbox*
+          - name: DATAOUT
+            value: /exchange
+          - name: DATABASE
+            value: christianiabpos
+          - name: DATABASEADMIN
+            value: databaseAdmin
+          - name: DATABASEPASSWORD
+            value: tcmsJ4hGXqjiPeNwfbH
+          - name: DATABASEURL
+            value:  mongodb://prod-mongos.percona:27017
+          - name: MAGICBOXURL
+            value: http://web:5301/api/v1/exchange/sharedmailbox
+          - name: EXCHAPPID
+            valueFrom:
+              secretKeyRef:
+                name: exchange
+                key: EXCHAPPID
+          - name: EXCHORGANIZATION  
+            valueFrom:
+              secretKeyRef:
+                name: exchange
+                key: EXCHORGANIZATION   
+          - name: EXCHCERTIFICATE
+            valueFrom:
+              secretKeyRef:
+                name: exchange
+                key: EXCHCERTIFICATE  
+          - name: EXCHCERTIFICATEPASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: exchange
+                key: EXCHCERTIFICATEPASSWORD      
+          - name: SPAUTH_CLIENTID
+            valueFrom:
+              secretKeyRef:
+                name: sharepoint
+                key: SPAUTH_CLIENTID      
+          - name: SPAUTH_CLIENTSECRET
+            valueFrom: 
+              secretKeyRef:
+                name: sharepoint
+                key: SPAUTH_CLIENTSECRET      
+          - name: SPAUTH_SITEURL
+            valueFrom:
+              secretKeyRef:
+                name: sharepoint
+                key: SPAUTH_SITEURL     
+          - name: SPAUTH_TENANTID
+            valueFrom:
+              secretKeyRef:
+                name: sharepoint
+                key: SPAUTH_TENANTID 
+          - name: SPAUTH_TENANTNAME
+            valueFrom:
+              secretKeyRef:
+                name: sharepoint
+                key: SPAUTH_TENANTNAME      
+          - name: PNPAPPID
+            valueFrom:
+              secretKeyRef:
+                name: sharepoint
+                key: PNPAPPID     
+          - name: PNPCERTIFICATE
+            valueFrom:
+              secretKeyRef:
+                name: sharepoint
+                key: PNPCERTIFICATE 
+          - name: PNPSITE
+            valueFrom:
+              secretKeyRef:
+                name: sharepoint
+                key: PNPSITE      
+          - name: PNPTENANTID
+            valueFrom:
+              secretKeyRef:
+                name: sharepoint
+                key: PNPTENANTID                               
+                           
+
+
+                
