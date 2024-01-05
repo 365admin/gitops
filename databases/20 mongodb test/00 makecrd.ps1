@@ -1,0 +1,151 @@
+<#---
+title: Create database CRD yaml
+---
+#>
+$name = "test2"
+$crd = @"
+apiVersion: psmdb.percona.com/v1
+kind: PerconaServerMongoDB
+metadata:
+  name: $name
+  finalizers:
+    - delete-psmdb-pods-in-order
+spec:
+  crVersion: 1.14.0
+  image: percona/percona-server-mongodb:6.0.4-3
+  imagePullPolicy: Always
+  allowUnsafeConfigurations: false
+  updateStrategy: SmartUpdate
+
+  upgradeOptions:
+    versionServiceEndpoint: https://check.percona.com
+    apply: disabled
+    schedule: "0 2 * * *"
+    setFCV: false
+  secrets:
+    users: $name-secrets
+    encryptionKey: $name-mongodb-encryption-key
+  pmm:
+    enabled: true
+    image: percona/pmm-client:2.40
+    serverHost: monitoring-service
+  replsets:
+
+  - name: rs0
+    size: 3
+    affinity:
+      antiAffinityTopologyKey: "kubernetes.io/hostname"
+
+    podDisruptionBudget:
+      maxUnavailable: 1
+    expose:
+      enabled: true
+      exposeType: ClusterIP
+    resources:
+      limits:
+        cpu: "300m"
+        memory: "0.5G"
+      requests:
+        cpu: "300m"
+        memory: "0.5G"
+    volumeSpec:
+      persistentVolumeClaim:
+        annotations:
+          resize.topolvm.io/storage_limit: 500Gi
+          resize.topolvm.io/increase: 20Gi
+          resize.topolvm.io/threshold: 20%
+          resize.topolvm.io/enabled: "true"      
+        resources:
+          requests:
+            storage: 20Gi
+
+    nonvoting:
+      enabled: false
+      size: 3
+      affinity:
+        antiAffinityTopologyKey: "kubernetes.io/hostname"
+      podDisruptionBudget:
+        maxUnavailable: 1
+      resources:
+        limits:
+          cpu: "300m"
+          memory: "0.5G"
+        requests:
+          cpu: "300m"
+          memory: "0.5G"
+      volumeSpec:
+        persistentVolumeClaim:
+          annotations:
+            resize.topolvm.io/storage_limit: 500Gi
+            resize.topolvm.io/increase: 20Gi
+            resize.topolvm.io/threshold: 20%
+            resize.topolvm.io/enabled: "true"      
+          resources:
+            requests:
+              storage: 20Gi
+    arbiter:
+      enabled: false
+      size: 1
+      affinity:
+        antiAffinityTopologyKey: "kubernetes.io/hostname"
+  sharding:
+    enabled: true
+
+    configsvrReplSet:
+      size: 3
+      affinity:
+        antiAffinityTopologyKey: "kubernetes.io/hostname"
+      podDisruptionBudget:
+        maxUnavailable: 1
+      expose:
+        enabled: false
+        exposeType: ClusterIP
+      resources:
+        limits:
+          cpu: "300m"
+          memory: "0.5G"
+        requests:
+          cpu: "300m"
+          memory: "0.5G"
+      volumeSpec:
+        persistentVolumeClaim:
+          annotations:
+            resize.topolvm.io/storage_limit: 500Gi
+            resize.topolvm.io/increase: 20Gi
+            resize.topolvm.io/threshold: 20%
+            resize.topolvm.io/enabled: "true"      
+          resources:
+            requests:
+              storage: 20Gi
+
+    mongos:
+      size: 3
+#      # for more configuration fields refer to https://docs.mongodb.com/manual/reference/configuration-options/
+#      configuration: |
+#        systemLog:
+#           verbosity: 1
+      affinity:
+        antiAffinityTopologyKey: "kubernetes.io/hostname"
+      podDisruptionBudget:
+        maxUnavailable: 1
+      resources:
+        limits:
+          cpu: "300m"
+          memory: "0.5G"
+        requests:
+          cpu: "300m"
+          memory: "0.5G"
+      expose:
+        exposeType: ClusterIP
+  backup:
+    enabled: true
+    image: percona/percona-backup-mongodb:2.0.4
+    serviceAccountName: percona-server-mongodb-operator
+    pitr:
+      enabled: false
+      compressionType: gzip
+      compressionLevel: 6
+"@
+
+
+Out-File "$psscriptroot/crd.yaml" -InputObject $crd -Encoding "UTF8"

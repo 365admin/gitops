@@ -1,0 +1,1 @@
+kubectl delete -f $PSScriptRoot/test.db.yaml
